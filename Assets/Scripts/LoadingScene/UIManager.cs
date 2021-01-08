@@ -15,28 +15,6 @@ public class UIManager : MonoBehaviour
             toAdd.transform.SetParent(transform);
             toAdd.SetActive(false);
         }
-        showSuccessUI();
-        showGameOverUI();
-    }
-
-    private void hideAllUI()
-    {
-        this.FindObject("GameOverUI").SetActive(false);
-        this.FindObject("SuccessUI").SetActive(false);
-    }
-
-    public void showGameOverUI()
-    {
-        hideAllUI();
-        GameObject gameOverUi = this.FindObject("GameOverUI");
-        gameOverUi.SetActive(true);
-    }
-
-    public void showSuccessUI()
-    {
-        hideAllUI();
-        GameObject gameOverUi = this.FindObject("SuccessUI");
-        gameOverUi.SetActive(true);
     }
 
     private GameObject FindObject(string name)
@@ -50,5 +28,35 @@ public class UIManager : MonoBehaviour
             }
         }
         return null;
+    }
+
+    private void hideAllUI()
+    {
+        this.FindObject("GameOverUI").SetActive(false);
+        this.FindObject("SuccessUI").SetActive(false);
+        this.FindObject("PauseUI").SetActive(false);
+    }
+
+    private void showUI(string name)
+    {
+        hideAllUI();
+        GameObject gameOverUi = this.FindObject(name);
+        gameOverUi.SetActive(true);
+    }
+
+    public void showGameOverUI()
+    {
+        showUI("GameOverUI");
+    }
+
+    public void showSuccessUI()
+    {
+        showUI("SuccessUI");
+    }
+
+    public void showPauseUI()
+    {
+        Time.timeScale = 0;
+        showUI("PauseUI");
     }
 }

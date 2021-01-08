@@ -21,4 +21,9 @@ public class UIBehaviour : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
+
+    public void Resume()
+    {
+        Time.timeScale = 1;
+    }
 }
