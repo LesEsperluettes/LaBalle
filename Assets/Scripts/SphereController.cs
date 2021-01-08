@@ -24,22 +24,35 @@ public class SphereController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float xSpeed = Input.GetAxis("Horizontal");
-        float ySpeed = Input.GetAxis("Vertical");
-        Rigidbody body = GetComponent<Rigidbody>();
-        body.AddTorque(new Vector3(xSpeed, 0, ySpeed) * ballSpeed * Time.deltaTime);
-        if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
+        if (Input.GetKey(KeyCode.UpArrow))
         {
-            _rb.AddForce(Vector3.up * jumpVelocity, ForceMode.Impulse);
+            _rb.AddTorque(Vector3.forward * ballSpeed);
+        }
+        if (Input.GetKey(KeyCode.DownArrow))
+        {
+            _rb.AddTorque(Vector3.back * ballSpeed);
+        }
+        if (Input.GetKey(KeyCode.RightArrow))
+        {
+            _rb.AddTorque(Vector3.right * ballSpeed);
+        }
+        if (Input.GetKey(KeyCode.LeftArrow))
+        {
+            _rb.AddTorque(Vector3.left * ballSpeed);
+        }
+
+        if (Input.GetKey(KeyCode.Space) && IsGrounded())
+        {
+            Vector3 jump = new Vector3(0.0f, 500.0f, 0.0f);
+            _rb.AddForce(jump);
         }
     }
 
-    private bool IsGrounded()
-    {
-        Vector3 sphereBottom = new Vector3(_col.bounds.center.x, _col.bounds.min.y, _col.bounds.center.z);
-        bool grounded = Physics.CheckSphere(sphereBottom, distanceToGround, groundLayer, QueryTriggerInteraction.Ignore);
-        Debug.Log(grounded);
-        Debug.Log(sphereBottom);
-        return grounded;
+private bool IsGrounded()
+{
+    Vector3 sphereBottom = new Vector3(_col.bounds.center.x, _col.bounds.min.y, _col.bounds.center.z);
+    bool grounded = Physics.CheckSphere(sphereBottom, distanceToGround, groundLayer, QueryTriggerInteraction.Ignore);
+    return grounded;
+
     }
 }
