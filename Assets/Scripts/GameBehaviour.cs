@@ -8,6 +8,7 @@ public class GameBehaviour : MonoBehaviour
 
     void Start()
     {
+        Time.timeScale = 1;
         ui = GameObject.Find("UIManager").GetComponent<UIManager>();
     }
 
@@ -17,16 +18,17 @@ public class GameBehaviour : MonoBehaviour
         {
             ui.showPauseUI();
         }
+    }
 
-        // TODO remove
-        if (Input.GetKeyDown(KeyCode.End))
-        {
-            ui.showGameOverUI();
-        }
+    public void onDeath()
+    {
+        Time.timeScale = 0;
+        ui.showGameOverUI();
+    }
 
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            ui.showSuccessUI();
-        }
+    public void onWin()
+    {
+        Time.timeScale = 0;
+        ui.showSuccessUI();
     }
 }

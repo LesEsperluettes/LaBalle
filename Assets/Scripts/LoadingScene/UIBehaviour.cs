@@ -14,6 +14,7 @@ public class UIBehaviour : MonoBehaviour
 
     public void GoBackToMainMenu()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene("MainMenu");
     }
 
@@ -25,7 +26,9 @@ public class UIBehaviour : MonoBehaviour
 
     public void GoToNextLevel()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        int nextScene = SceneManager.GetActiveScene().buildIndex + 1;
+        if (nextScene < SceneManager.sceneCountInBuildSettings) SceneManager.LoadScene(nextScene);
+        else GoBackToMainMenu();
     }
 
     public void Resume()
