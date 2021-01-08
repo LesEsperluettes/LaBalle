@@ -310,6 +310,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   distanceToGround: 0.1
+  audioSource: {fileID: 1074198064}
+  jumpSound: {fileID: 8300000, guid: 09a41d5a417080a48b890f2527a1b05e, type: 3}
 --- !u!135 &31334186
 SphereCollider:
   m_ObjectHideFlags: 0

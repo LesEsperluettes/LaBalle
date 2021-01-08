@@ -9,6 +9,9 @@ public class SphereController : MonoBehaviour
     public LayerMask groundLayer;
     public float distanceToGround = 0.1f;
 
+    public AudioSource audioSource;
+    public AudioClip jumpSound;
+
 
     private Rigidbody _rb;
     private SphereCollider _col;
@@ -45,7 +48,14 @@ public class SphereController : MonoBehaviour
         {
             Vector3 jump = new Vector3(0.0f, 500.0f, 0.0f);
             _rb.AddForce(jump);
+            playJumpSound();
         }
+    }
+
+    private void playJumpSound()
+    {
+        audioSource.clip = jumpSound;
+        audioSource.Play();
     }
 
 private bool IsGrounded()
