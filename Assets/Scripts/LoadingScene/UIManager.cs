@@ -6,6 +6,11 @@ public class UIManager : MonoBehaviour
 {
     public List<GameObject> prefabsToInst;
 
+    public AudioSource audioSource;
+    public AudioClip deadSound;
+    public AudioClip winSound;
+    public AudioClip pauseSound;
+
     void Start()
     {
         foreach(GameObject prefab in prefabsToInst)
@@ -15,6 +20,12 @@ public class UIManager : MonoBehaviour
             toAdd.transform.SetParent(transform);
             toAdd.SetActive(false);
         }
+    }
+
+    private void playSound(AudioClip clip)
+    {
+        audioSource.clip = clip;
+        audioSource.Play();
     }
 
     private GameObject FindObject(string name)
@@ -32,9 +43,9 @@ public class UIManager : MonoBehaviour
 
     private void hideAllUI()
     {
-        this.FindObject("GameOverUI").SetActive(false);
-        this.FindObject("SuccessUI").SetActive(false);
-        this.FindObject("PauseUI").SetActive(false);
+        hideUI("GameOverUI");
+        hideUI("SuccessUI");
+        hideUI("PauseUI");
     }
 
     private void showUI(string name)
@@ -44,18 +55,26 @@ public class UIManager : MonoBehaviour
         gameOverUi.SetActive(true);
     }
 
+    public void hideUI(string name)
+    {
+        this.FindObject(name).SetActive(false);
+    }
+
     public void showGameOverUI()
     {
+        playSound(deadSound);
         showUI("GameOverUI");
     }
 
     public void showSuccessUI()
     {
+        playSound(winSound);
         showUI("SuccessUI");
     }
 
     public void showPauseUI()
     {
+        playSound(pauseSound);
         Time.timeScale = 0;
         showUI("PauseUI");
     }
