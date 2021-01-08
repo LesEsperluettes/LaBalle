@@ -5,6 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class UIBehaviour : MonoBehaviour
 {
+    private UIManager ui;
+
+    void Start()
+    {
+        ui = GameObject.Find("UIManager").GetComponent<UIManager>();
+    }
 
     public void GoBackToMainMenu()
     {
@@ -25,5 +31,6 @@ public class UIBehaviour : MonoBehaviour
     public void Resume()
     {
         Time.timeScale = 1;
+        ui.hideUI("PauseUI");
     }
 }
